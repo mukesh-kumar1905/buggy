@@ -1,11 +1,19 @@
 class App.Views.Content extends Backbone.View
 	className:"row"
 
+	initialize:->
+		@listenTo App.Vent,"project:create",@swapMainToEmpty
+
 	template:HandlebarsTemplates["app/templates/content"]
+
 	render: ->
 		@$el.html(@template())
 		@
 
+	
+	swapMainToEmpty:->
+		@swapMain(new App.Views.Empty())
+		Backbone.history.navigate("/projects")
 
 	swapMain: (v)->
 		@changeCurrentMainView(v)
