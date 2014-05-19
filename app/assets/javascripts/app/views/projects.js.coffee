@@ -3,7 +3,9 @@ class App.Views.Projects extends Backbone.View
 	template:HandlebarsTemplates["app/templates/projects"]
 	events:
 		"click a.btn":"newProject"
-	newProject:->
+	newProject:(e)->
+		e.preventDefault()
+		App.Vent.trigger "project:new"
 
 	initialize: ->
 		@collection.on "reset",@render,@
