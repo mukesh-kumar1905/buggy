@@ -1,13 +1,19 @@
 class App.Views.Projects extends Backbone.View
 	className:""
+	template:HandlebarsTemplates["app/templates/projects"]
 	events:
 		"click a.btn":"newProject"
 	newProject:->
-		
+
 	initialize: ->
 		@collection.on "reset",@render,@
+		@collection.on "add",@renderProject,@
 		@collection.fetch({reset:true})
-	template:HandlebarsTemplates["app/templates/projects"]
+		@listenTo App.Vent, "project:create",@addToCollection
+	
+	addToCollection:(model)->
+		@collection.add model
+
 	render:->
 		@$el.html(@template())
 		@collection.each @renderProject,@
