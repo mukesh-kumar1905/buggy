@@ -1,0 +1,11 @@
+<form id="new_project" action="/projects" method="put">
+	<fieldset>
+		<legend>Edit Project</legend>
+		<label for="name">Project Name</label><br/>
+		<input type="text" name="name" id="name" placeholder="Project Name" value="{{ name }}"/><br/>
+		<label for="description">Description</label><br/>
+		<textarea id="description" name="description" rows="5" cols="30" placeholder="Description">{{ description }}</textarea>
+		<br/>
+		<button type="submit" class="btn">&nbsp;Submit&nbsp;</button>
+	</fieldset>	
+</form>

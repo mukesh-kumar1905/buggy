@@ -3,7 +3,7 @@ class App.Views.Project extends Backbone.View
 
 	initialize: ->
 		@listenTo @model,"destroy",@remove
-
+		@listenTo @model,"change:name",@render
 
 	render:->
 		@$el.html(@template(@model.toJSON()))
