@@ -12,8 +12,9 @@ class App.Models.CurrentUser extends Backbone.Model
 		m=new App.Models.Login({id:@id})
 		console.log m.toJSON()
 		m.destroy
-			success:=>
+			success:(model,data)=>
 				@set loggedIn:false
 				delete @id
 				delete @attributes.email
 				delete @attributes.id
+				window.csrf(data.csrf)
