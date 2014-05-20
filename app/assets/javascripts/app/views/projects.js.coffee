@@ -19,7 +19,7 @@ class App.Views.Projects extends Backbone.View
 		@collection.add model
 
 	render:->
-		@$el.html(@template())
+		@$el.html(@template({authenticated:App.CurrentUser.get('loggedIn')}))
 		@collection.each @renderProject,@
 		@
 
