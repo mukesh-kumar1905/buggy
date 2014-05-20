@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
 #handlebars for templates
 gem 'handlebars_assets'
+#for authentication
+gem 'sorcery'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
