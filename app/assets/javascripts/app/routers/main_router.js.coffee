@@ -20,8 +20,9 @@ class App.Routers.MainRouter extends Backbone.Router
 		App.Vent.trigger "user:logged_out"
 
 	loginFromLogout:->
-		@login()
-		
+		@layoutViews()
+		@contentView.swapMain( new App.Views.Login({model:new App.Models.Login()}))
+
 	newProject:->
 		@layoutViews()
 		if App.CurrentUser.get("loggedIn")
