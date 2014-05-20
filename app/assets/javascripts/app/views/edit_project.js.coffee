@@ -1,6 +1,8 @@
 class App.Views.EditProject extends Backbone.View
 	template:HandlebarsTemplates["app/templates/edit_project"]
-
+	initialize:->
+		@listenTo @model,"sync",@render
+		@model.fetch() unless @model.isNew()
 	events:
 		"click button.btn":"editProject"
 

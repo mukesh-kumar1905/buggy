@@ -8,11 +8,13 @@ class App.Views.Projects extends Backbone.View
 		App.Vent.trigger "project:new"
 
 	initialize: ->
+		@childViews=[]
 		@collection.on "reset",@render,@
 		@collection.on "add",@renderProject,@
 		@collection.fetch({reset:true})
 		@listenTo App.Vent, "project:create",@addToCollection
-	
+		@listenTo App.Vent, "remove",@leave
+			
 	addToCollection:(model)->
 		@collection.add model
 
@@ -20,6 +22,10 @@ class App.Views.Projects extends Backbone.View
 		@$el.html(@template())
 		@collection.each @renderProject,@
 		@
+
 	renderProject:(model)->
 		v = new App.Views.Project({model:model})
-		@$("ul").append(v.render().el) 
+		@childViews.push(v)
+		@$("ul").append(v.render().el)
+
+		

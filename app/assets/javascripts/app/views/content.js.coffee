@@ -28,7 +28,7 @@ class App.Views.Content extends Backbone.View
 		@$('#main-area').html(@currentMainView.render().el)
 
 	changeCurrentMainView: (v)->
-		@currentMainView.remove if @currentMainView
+		@currentMainView.leave() if @currentMainView
 		@currentMainView=v
 
 	swapSide: (v)->
@@ -36,11 +36,12 @@ class App.Views.Content extends Backbone.View
 		@$('#side-area').html(@currentsideView.render().el)
 
 	changeCurrentsideView: (v)->
-		@currentsideView.remove if @currentsideView
+		@currentsideView.leave() if @currentsideView
 		@currentsideView=v
 
 	projectShow: (model)->
 		@swapMain(new App.Views.ProjectDetails({model:model}))
+		Backbone.history.navigate("/project/#{model.id}")
 
 	swapMainToEdit:(model)->
 		@swapMain(new App.Views.EditProject({model:model}))

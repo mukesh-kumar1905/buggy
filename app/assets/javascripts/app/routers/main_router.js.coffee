@@ -5,6 +5,7 @@ class App.Routers.MainRouter extends Backbone.Router
 		"projects":"project"
 		"projects/new":"newProject"
 		"project/:id":"projectDetails"
+		"projects/:id/edit":"projectEdit"
 
 	newProject:->
 		@layoutViews()
@@ -32,4 +33,9 @@ class App.Routers.MainRouter extends Backbone.Router
 	projectDetails: (id)->
 		@layoutViews()
 		@contentView.swapMain(new App.Views.ProjectDetails(model:new App.Models.Project({id:id})))
+		@contentView.swapSide( new App.Views.Projects({collection:new App.Collections.Projects}))
+
+	projectEdit:(id)->
+		@layoutViews()
+		@contentView.swapMain(new App.Views.EditProject({model:new App.Models.Project({id:id})}))
 		@contentView.swapSide( new App.Views.Projects({collection:new App.Collections.Projects}))
