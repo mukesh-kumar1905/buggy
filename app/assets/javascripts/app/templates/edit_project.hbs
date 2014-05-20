@@ -1,11 +1,18 @@
-<form id="new_project" action="/projects" method="put">
+<form id="new_project" action="/projects" method="put" class="form-horizontal">
 	<fieldset>
 		<legend>Edit Project</legend>
-		<label for="name">Project Name</label><br/>
-		<input type="text" name="name" id="name" placeholder="Project Name" value="{{ name }}"/><br/>
-		<label for="description">Description</label><br/>
-		<textarea id="description" name="description" rows="5" cols="30" placeholder="Description">{{ description }}</textarea>
-		<br/>
+		<div class="form-group">
+		<label for="name" class="control-label ">Project Name</label>
+		<div class="controls">
+		<input type="text" name="name" id="name" placeholder="Project Name" value="{{ name }}" class="form-control"/>
+		</div>
+		</div>
+		<div class="form-group">
+		<label for="description" class="control-label ">Description</label>
+		<div class="controls">
+		<textarea id="description" name="description" rows="5" cols="30" placeholder="Description" class="form-control">{{ description }}</textarea>
+		</div>
+		</div>
 		<button type="submit" class="btn">&nbsp;Submit&nbsp;</button>
 	</fieldset>	
 </form>
