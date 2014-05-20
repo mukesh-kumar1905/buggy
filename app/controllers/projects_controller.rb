@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
 		@project=Project.find(params[:id])
 		return @project
 	end
+	def destroy
+		@project=Project.find(params[:id])
+		@project.destroy
+		respond_with @project
+	end
 	private
 	def post_params(params)
 		params.require(:project).permit(:name,:description)

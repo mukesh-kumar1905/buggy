@@ -5,6 +5,7 @@ class App.Views.Content extends Backbone.View
 		@listenTo App.Vent,"project:create",@swapMainToEmpty
 		@listenTo App.Vent,"project:new",@swapMainToNew
 		@listenTo App.Vent,"project:show",@projectShow
+		@listenTo App.Vent,"project:delete",@swapMainToEmpty
 
 	template:HandlebarsTemplates["app/templates/content"]
 
