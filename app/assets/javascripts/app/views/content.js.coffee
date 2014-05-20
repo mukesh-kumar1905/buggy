@@ -2,7 +2,7 @@ class App.Views.Content extends Backbone.View
 	className:"row"
 
 	initialize:->
-		@listenTo App.Vent,"project:create",@swapMainToEmpty
+		@listenTo App.Vent,"project:create",@projectShow
 		@listenTo App.Vent,"project:new",@swapMainToNew
 		@listenTo App.Vent,"project:show",@projectShow
 		@listenTo App.Vent,"project:delete",@swapMainToEmpty

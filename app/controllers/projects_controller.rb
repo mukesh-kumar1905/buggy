@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 		respond_with project
 	end
 	def show
-		@project=Project.find(params[:id])
+		@project=Project.includes(:issues).find(params[:id])
 		return @project
 	end
 	def update
