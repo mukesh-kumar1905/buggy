@@ -4,6 +4,7 @@ class App.Views.Content extends Backbone.View
 	initialize:->
 		@listenTo App.Vent,"project:create",@swapMainToEmpty
 		@listenTo App.Vent,"project:new",@swapMainToNew
+		@listenTo App.Vent,"project:show",@projectShow
 
 	template:HandlebarsTemplates["app/templates/content"]
 
@@ -35,3 +36,6 @@ class App.Views.Content extends Backbone.View
 	changeCurrentsideView: (v)->
 		@currentsideView.remove if @currentsideView
 		@currentsideView=v
+
+	projectShow: (model)->
+		@swapMain(new App.Views.ProjectDetails({model:model}))
