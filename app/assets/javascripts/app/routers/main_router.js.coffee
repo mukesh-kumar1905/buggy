@@ -6,6 +6,11 @@ class App.Routers.MainRouter extends Backbone.Router
 		"projects/new":"newProject"
 		"project/:id":"projectDetails"
 		"projects/:id/edit":"projectEdit"
+		"login":"login"
+
+	login:->
+		@layoutViews()
+		@contentView.swapMain( new App.Views.Login({model:new App.Models.Login()}))
 
 	newProject:->
 		@layoutViews()
