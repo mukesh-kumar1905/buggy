@@ -10,12 +10,18 @@ class App.Routers.MainRouter extends Backbone.Router
 		"logout":"logout"
 
 	login:->
-		@layoutViews()
-		@contentView.swapMain( new App.Views.Login({model:new App.Models.Login()}))
+		if App.CurrentUser.get('loggedIn')
+			@project()
+		else
+			@layoutViews()
+			@contentView.swapMain( new App.Views.Login({model:new App.Models.Login()}))
 
 	logout:->
 		App.Vent.trigger "user:logged_out"
 
+	loginFromLogout:->
+		@login()
+		
 	newProject:->
 		@layoutViews()
 		if App.CurrentUser.get("loggedIn")
@@ -28,6 +34,7 @@ class App.Routers.MainRouter extends Backbone.Router
 	initialize: ->
 		@headerView=new App.Views.Header()
 		@contentView=new App.Views.Content()
+		@listenTo App.Vent,"user:logged_out",@loginFromLogout
 
 	index:->
 		@layoutViews()

@@ -7,9 +7,14 @@ class App.Views.Content extends Backbone.View
 		@listenTo App.Vent,"project:show",@projectShow
 		@listenTo App.Vent,"project:delete",@swapMainToEmpty
 		@listenTo App.Vent,"project:edit",@swapMainToEdit
-		@listenTo App.Vent ,"user:logged_in",@swapMainToEmpty
+		@listenTo App.Vent ,"user:logged_in",@swapMainToLoggedInView
+		@listenTo App.Vent ,"user:logged_out",@swapMainToEmpty
 		@listenTo App.Vent ,"access_denied",@accessDenied
 
+	swapMainToLoggedInView:->
+		@swapMainToEmpty()
+		@swapSide( new App.Views.Projects({collection:new App.Collections.Projects}))
+		
 	accessDenied:->
 		@swapMain(new App.Views.AccessDenied())
 
