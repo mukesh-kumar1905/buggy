@@ -1,7 +1,8 @@
 class App.Views.ProjectDetails extends Backbone.View
 	template:HandlebarsTemplates['app/templates/project_details']
 	initialize:->
-		@listenTo @model,"sync",@render
+		@childViews=[]
+		@listenTo @model,"sync",@renderDetails
 		@model.fetch()
 
 	events:
@@ -19,3 +20,11 @@ class App.Views.ProjectDetails extends Backbone.View
 	render:->
 		@$el.html(@template(@model.toJSON()))
 		@
+
+	renderDetails:->
+		@$el.html(@template(@model.toJSON()))
+		v=new App.Views.Issues({collection:@model.issues})
+		@childViews.push(v)
+		@$('#issues').html(v.render().el)
+		@
+
