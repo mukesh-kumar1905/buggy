@@ -7,10 +7,14 @@ class App.Routers.MainRouter extends Backbone.Router
 		"project/:id":"projectDetails"
 		"projects/:id/edit":"projectEdit"
 		"login":"login"
+		"logout":"logout"
 
 	login:->
 		@layoutViews()
 		@contentView.swapMain( new App.Views.Login({model:new App.Models.Login()}))
+
+	logout:->
+		App.Vent.trigger "user:logged_out"
 
 	newProject:->
 		@layoutViews()

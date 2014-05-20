@@ -5,4 +5,7 @@ class SessionsController < ApplicationController
 		render status:422 unless @user
 		@user
 	end
+	def destroy
+		logout
+	end
 end
