@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     if user
         can :create,Project
+        can [:update,:delete],Project, user_id:user.id
     end
     # Define abilities for the passed in user here. For example:
     #

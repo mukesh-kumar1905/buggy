@@ -2,7 +2,10 @@ class App.Views.ProjectDetails extends Backbone.View
 	template:HandlebarsTemplates['app/templates/project_details']
 	initialize:->
 		@childViews=[]
+		@listenTo @model,"change",@renderDetails
 		@listenTo @model,"sync",@renderDetails
+		@listenTo @model,"error",@triggerAccessDenied
+		@listenTo @model,"destroy",@triggerProjectDestroy
 		@model.fetch()
 
 	events:
@@ -11,8 +14,7 @@ class App.Views.ProjectDetails extends Backbone.View
 
 	deleteProject:(e)->
 		return unless confirm("Are you sure you want to delete #{@model.get('name')}?")
-		@model.destroy
-			success:-> App.Vent.trigger "project:delete"
+		@model.destroy({wait:true})
 
 	editProject:(e)->
 		App.Vent.trigger "project:edit",@model
@@ -34,3 +36,7 @@ class App.Views.ProjectDetails extends Backbone.View
 
 		@
 
+	triggerProjectDestroy:->
+		App.Vent.trigger "project:delete"
+
+	triggerAccessDenied:->App.Vent.trigger "access_denied"
