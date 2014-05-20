@@ -28,4 +28,6 @@ class App.Views.Projects extends Backbone.View
 		@childViews.push(v)
 		@$("ul").append(v.render().el)
 
+	
+
 		
