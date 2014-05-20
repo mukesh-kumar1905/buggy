@@ -7,6 +7,7 @@ class App.Views.Content extends Backbone.View
 		@listenTo App.Vent,"project:show",@projectShow
 		@listenTo App.Vent,"project:delete",@swapMainToEmpty
 		@listenTo App.Vent,"project:edit",@swapMainToEdit
+		@listenTo App.Vent ,"user:logged_in",@swapMainToEmpty
 
 	template:HandlebarsTemplates["app/templates/content"]
 
@@ -17,7 +18,6 @@ class App.Views.Content extends Backbone.View
 	
 	swapMainToEmpty:->
 		@swapMain(new App.Views.Empty())
-		Backbone.history.navigate("/projects")
 
 	swapMainToNew:->
 		@swapMain( new App.Views.NewProject(model:new App.Models.Project))
