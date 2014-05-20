@@ -3,7 +3,10 @@ class IssuesController < ApplicationController
 	def create
 		@issue=Issue.new(post_params)
 		@issue.save()
-		respond_with @issue
+		@issue
+	end
+	def show
+		respond_with Issue.find(params[:id])
 	end
 	private
 	def post_params

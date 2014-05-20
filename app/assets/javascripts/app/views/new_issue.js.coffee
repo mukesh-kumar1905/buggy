@@ -3,6 +3,7 @@ class App.Views.NewIssue extends Backbone.View
 	initialize:->
 		@listenTo @model,"invalid",@renderErrors
 		@listenTo @model,"error",@parseErrorResponse
+		@listenTo @model,"sync",@success
 		@model.fetch() unless @model.isNew()
 	events:
 		"click button.btn":"createIssue"
@@ -11,11 +12,21 @@ class App.Views.NewIssue extends Backbone.View
 		e.preventDefault()
 		@model.set name:@$("#name").val()
 		@model.set description:@$("#description").val()
-		@model.save {},
-			success:(model)->App.Vent.trigger "issue:create",model
+		@model.save()
 
 	render:->
 		@$el.html(@template(@model.toJSON()))
 		@
-	
+
+	success:()->
+		@clearForm()
+		App.Vent.trigger "issue:create" ,@model.clone()
+
+	clearForm:->
+		@$("#name").val("")
+		@$("#description").val("")
+		@clearErrors
+		delete @model.id
+		delete @model.attributes.id
+
 _.extend App.Views.NewIssue.prototype,App.Mixins.Validatable
