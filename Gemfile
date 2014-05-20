@@ -26,6 +26,7 @@ gem 'bootstrap-sass'
 gem 'handlebars_assets'
 #for authentication
 gem 'sorcery'
+gem 'cancan'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
