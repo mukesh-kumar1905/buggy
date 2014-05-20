@@ -2,6 +2,7 @@ class App.Views.NewProject extends Backbone.View
 	template:HandlebarsTemplates["app/templates/new_project"]
 	initialize:->
 		@listenTo @model,"invalid",@renderErrors
+		@listenTo @model,"error",@parseErrorResponse
 		@model.fetch() unless @model.isNew()
 	events:
 		"click button.btn":"createProject"
@@ -25,3 +26,8 @@ class App.Views.NewProject extends Backbone.View
 		err=errors.join "; "
 		@$("#"+attr).closest("div.form-group").addClass("has-error")
 		@$("#"+attr).closest("div.controls").append("<span class='help-block'>#{err}<span>")
+
+	parseErrorResponse:(model,resp)->
+		if resp and resp.responseText
+			errors=JSON.parse resp.responseText
+			@renderErrors(model,errors.errors)
