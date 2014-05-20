@@ -9,6 +9,7 @@ class App.Views.Issues extends Backbone.View
 		@$el.html(@template(count:@collection.length))
 		@collection.forEach @renderIssue,@
 		@
+	
 	renderIssue:(model)->
 		console.log "yo"
 		v = new App.Views.Issue({model:model})

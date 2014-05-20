@@ -1,0 +1,20 @@
+</div><form id="new_project" action="/issues" method="post" class="form-horizontal">
+	<fieldset>
+		<legend>New Issue</legend>
+		<input type="hidden" name="project_id" id="project_id" value="{{ project_id }}" class="form-control"/>
+		<div class="form-group">
+		<label for="name" class="control-label ">Issue Name</label>
+		<div class="controls">
+		<input type="text" name="name" id="name" placeholder="Issue Name" class="form-control"/>
+		</div>
+		</div>
+		<div class="form-group">
+		<label for="description" class="control-label">Description</label>
+		<div class="controls">
+		<textarea id="description" name="description" rows="5" cols="30" placeholder="Description" class="form-control"></textarea>
+		</div>
+		</div>
+		<button type="submit" class="btn">&nbsp;Submit&nbsp;</button>
+	</fieldset>	
+</form>
+</div>
