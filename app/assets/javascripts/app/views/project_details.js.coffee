@@ -1,6 +1,9 @@
 class App.Views.ProjectDetails extends Backbone.View
 	template:HandlebarsTemplates['app/templates/project_details']
 	initialize:->
+		if @model.get('user_id') is App.CurrentUser.id
+			@model.set owned:true
+		console.log(@model.get('owned'))
 		@childViews=[]
 		@listenTo @model,"change",@renderDetails
 		@listenTo @model,"sync",@renderDetails

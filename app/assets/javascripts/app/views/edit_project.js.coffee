@@ -1,7 +1,7 @@
 class App.Views.EditProject extends Backbone.View
 	template:HandlebarsTemplates["app/templates/edit_project"]
 	initialize:->
-		@listenTo @model,"sync",@render
+		@listenTo @model,"sync",@checkAndRender
 		@listenTo @model,"invalid",@renderErrors
 		@listenTo @model,"error",@parseErrorResponse
 		@model.fetch() unless @model.isNew()
@@ -18,5 +18,9 @@ class App.Views.EditProject extends Backbone.View
 	render:->
 		@$el.html(@template(@model.toJSON()))
 		@
-
+	checkAndRender:->
+		if @model.get("user_id") is App.CurrentUser.id
+			@render
+		else
+			App.Vent.trigger "access_denied"
 _.extend App.Views.EditProject.prototype,App.Mixins.Validatable

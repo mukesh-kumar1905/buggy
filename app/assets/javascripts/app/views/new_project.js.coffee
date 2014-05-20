@@ -1,6 +1,7 @@
 class App.Views.NewProject extends Backbone.View
 	template:HandlebarsTemplates["app/templates/new_project"]
 	initialize:->
+		@listenTo @model,"sync",@render
 		@listenTo @model,"invalid",@renderErrors
 		@listenTo @model,"error",@parseErrorResponse
 		@model.fetch() unless @model.isNew()
