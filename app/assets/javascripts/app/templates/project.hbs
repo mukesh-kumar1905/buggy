@@ -1,1 +1,7 @@
-<li><span class="badge">&nbsp;{{ issues_count }}&nbsp;</span>&nbsp;&nbsp;<a href="">{{ name }}</a></li>
+<li><span class="badge">
+{{#if issues_count}}
+{{ issues_count }}
+{{else}}
+0
+{{/if}}
+</span>&nbsp;&nbsp;<a href="">{{ name }}</a></li>
